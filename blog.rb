@@ -1,6 +1,7 @@
 require_relative 'post'
+require_relative 'lib/entity'
 
-class Blog
+class Blog < Entity
 
   attr_accessor :entries, :post_source
 
