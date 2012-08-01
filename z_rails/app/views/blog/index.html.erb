@@ -1,2 +1,3 @@
-<h1><%= @blog.title %></h1> 
-<h2><%= @blog.subtitle %></h2>
+<h1><%= @blog.title %></h1>
+<h2><%= @blog.subtitle %></h2>
+<%= render :partial => "entry", :collection => @blog.entries %>
