@@ -42,16 +42,27 @@ describe Post do
 
   end
 
-  context 'after initialization' do
+  context 'publication' do
     before :each do
+      blog.stub(:add_entry)
       subject.title = "title"
       subject.body = "body"
       subject.blog = blog
     end
 
+    it "should have a nil pubdate before publication" do
+      subject.pubdate.should be_nil
+    end
+
     it "should be publishable" do
       blog.should_receive(:add_entry).with subject
       subject.publish
+    end
+
+    it "should have the correct pubdate after publication" do
+      clock = OpenStruct.new(now: DateTime.now)
+      subject.publish(clock)
+      subject.pubdate.should == clock.now
     end
 
   end

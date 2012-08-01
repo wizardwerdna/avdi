@@ -18,6 +18,7 @@ describe Blog do
     it{should have(0).entries}
 
     it "should permit you to add new entries" do
+      entry.stub(:pubdate)
       subject.add_entry entry
       subject.entries.should == [entry]
     end
@@ -57,6 +58,18 @@ describe Blog do
       post = subject.new_post(blog: nil).blog.should == subject
     end
 
+  end
+
+  context "entries" do
+    it "should be sorted in by pubdate in reverse order" do
+      3.times{|i| subject.add_entry OpenStruct.new(pubdate: i)}
+      subject.entries.map(&:pubdate).should == [2,1,0] 
+    end
+
+    it "should be limited to 10 elements" do
+      11.times{|i| subject.add_entry OpenStruct.new(pubdate: i)}
+      subject.entries.map(&:pubdate).should == [10,9,8,7,6,5,4,3,2,1] 
+    end
   end
 
 end

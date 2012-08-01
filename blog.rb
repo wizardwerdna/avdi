@@ -3,10 +3,10 @@ require_relative 'lib/entity'
 
 class Blog < Entity
 
-  attr_accessor :entries, :post_source
+  attr_accessor :post_source
 
   def initialize
-    self.entries = []
+    @entries = []
   end
 
   def title
@@ -18,13 +18,16 @@ class Blog < Entity
   end
 
   def add_entry entry
-    entries << entry  
+    @entries << entry  
   end
 
   def new_post attrs = {}
     post_source.call(attrs.merge(blog: self))
   end
 
+  def entries
+    @entries.sort_by(&:pubdate).reverse.take(10)
+  end
 end
 
 
