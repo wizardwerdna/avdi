@@ -54,17 +54,59 @@ describe Post do
       subject.pubdate.should be_nil
     end
 
-    it "should be publishable" do
-      blog.should_receive(:add_entry).with subject
-      subject.publish
+    context "when valid" do
+
+      it "should be publishable" do
+        blog.should_receive(:add_entry).with subject
+        subject.publish
+      end
+
+      it "should have the correct pubdate after publication" do
+        clock = OpenStruct.new(now: DateTime.now)
+        subject.publish(clock)
+        subject.pubdate.should == clock.now
+      end
+
+      it "should return true" do
+        subject.publish.should be_true
+      end
+
     end
 
-    it "should have the correct pubdate after publication" do
-      clock = OpenStruct.new(now: DateTime.now)
-      subject.publish(clock)
-      subject.pubdate.should == clock.now
+    context "when not valid" do
+      before :each do
+        subject.stub(:valid? => false)
+      end
+
+      it "should not be publishable" do
+        blog.should_not_receive(:add_entry)
+        subject.publish
+      end
+
+      it "should have a nil pubdate" do
+        subject.publish
+        subject.pubdate.should be_nil
+      end
+
+      it "should return false" do
+        subject.publish.should be_false
+      end
     end
 
+  end
+
+  context 'validation' do
+    it "should be valid if it has a title" do
+      subject.title = stub
+      subject.should be_valid
+    end
+
+    it "should not be valid if it does not have a title" do
+      subject.title = nil
+      subject.should_not be_valid
+      subject.title = ""
+      subject.should_not be_valid
+    end
   end
 
 end

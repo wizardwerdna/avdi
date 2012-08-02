@@ -1,6 +1,17 @@
 <h1>New Post</h1>
 <%= form_for @post do |f| %>
-    <%= f.text_field :title %><br>
-    <%= f.text_area :body %><br>
-    <%= f.submit %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>  
+  <%= f.text_field :title %><br>
+  <%= f.text_area :body %><br>
+  <%= f.submit %>
 <% end %>
