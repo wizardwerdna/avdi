@@ -1,0 +1,14 @@
+<html>
+  <head>
+    <title>Index is an index</title>
+  </head>
+  <body>
+    <h1>List of Shortcuts</h1>
+    <table>
+      <tr><th>Shortcut</th><th>Locator</th></tr>
+      <% for page in pages %>
+        <tr><td><A href="<%= page.locator %>"><%= page.name %></td><td><%= page.locator %></A></td></tr>
+      <% end %>
+    </table>
+  </body>
+</html>

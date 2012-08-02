@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bloog</title>
+    <link href="/application.css" media="screen" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar one columns">
+        <h4>Actions</h4>
+        <nav>
+          <ul>
+            <li><A href="/post/new">New Post...</A></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="content ten columns">
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>

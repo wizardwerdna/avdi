@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rspec'
-
+gem 'sinatra'
 gem 'rails', '3.2.6'
 
 # Bundle edge Rails instead:

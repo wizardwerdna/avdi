@@ -1,0 +1,16 @@
+<h1>New Post</h1>
+<form accept-charset="UTF-8" action="/posts" class="new_post" id="new_post" method="post">
+   <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= "#{post.errors.count} error(s)" %> prohibited this post from being saved:</h2>
+      <ul>
+      <% post.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <input value="<%=post.title%>" id="post_title"  name="post[title]" size="80" type="text" /><br>
+  <textarea cols="80" id="post_body" name="post[body]" rows="20"><%=post.body%></textarea><br>
+  <input name="commit" type="submit" value="Create Post" />
+</form>
