@@ -3,8 +3,8 @@ require_relative '../application'
 require_relative 'application_configuration.rb'
 
 module Bloog
-
   class Main < Sinatra::Base
+    include Interactors
 
     # List first 10 entries, if any, in reverse chronological order 
     get '/' do
@@ -13,17 +13,17 @@ module Bloog
 
     # form for creating a new post
     get '/post/new' do
-      post = THE_BLOG.new_post
+      post = NewPost[blog: THE_BLOG].post
       erb :post_new, locals: { post: post }, :layout => :application
     end
 
     # create a new post
     post '/posts' do
-      entry = THE_BLOG.new_post(params[:post])
-      if entry.publish
+      result = PublishPost[ params[:post].merge(blog: THE_BLOG) ]
+      if result.ok?
         redirect "/" 
       else
-        erb :post_new, locals: { post: entry }, :layout => :application
+        erb :post_new, locals: { post: result.post }, :layout => :application
       end
     end
 
