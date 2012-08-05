@@ -1,4 +1,5 @@
 require_relative 'post'
+require_relative 'post_repo'
 require_relative 'lib/entity'
 
 class Blog < Entity
@@ -6,7 +7,7 @@ class Blog < Entity
   attr_accessor :post_source
 
   def initialize
-    @entries = []
+    @entries_repo = EntriesRepo.new
   end
 
   def title
@@ -18,7 +19,7 @@ class Blog < Entity
   end
 
   def add_entry entry
-    @entries << entry  
+    @entries_repo.add_entry entry
   end
 
   def new_post attrs = {}
@@ -26,7 +27,7 @@ class Blog < Entity
   end
 
   def entries
-    @entries.sort_by(&:pubdate).reverse.take(10)
+    @entries_repo.all_reverse_chrono_take10 
   end
 end
 
