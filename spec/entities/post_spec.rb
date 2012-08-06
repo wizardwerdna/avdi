@@ -1,4 +1,5 @@
-require_relative '../post.rb'
+require_relative '../../entities/post.rb'
+
 describe Post do
   subject {Post.new}
   

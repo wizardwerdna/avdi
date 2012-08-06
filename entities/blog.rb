@@ -1,13 +1,13 @@
+require_relative '../boundaries/repository'
 require_relative 'post'
-require_relative 'post_repo'
-require_relative 'lib/entity'
+require_relative '../lib/entity'
 
 class Blog < Entity
 
   attr_accessor :post_source
 
   def initialize
-    @entries_repo = EntriesRepo.new
+    @entries_repo = Repository.for(Entry)
   end
 
   def title

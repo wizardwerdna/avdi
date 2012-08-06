@@ -1,7 +1,7 @@
 require 'ostruct'
-require_relative 'lib/entity'
+require_relative 'entry'
 
-class Post < Entity
+class Post < Entry
   
   attr_accessor :title, :body, :blog 
   attr_reader :pubdate

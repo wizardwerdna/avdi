@@ -1,7 +1,12 @@
-require_relative '../blog.rb'
+require_relative '../../entities/blog.rb'
+require_relative '../../z_repositories/post_repo'
 
 describe Blog do
-  
+
+  before :each do
+    Repository.configure Entry => EntriesRepo.new, Post => PostsRepo.new
+  end
+
   let(:subject){Blog.new}
   let(:entry){double "entry"}
 
