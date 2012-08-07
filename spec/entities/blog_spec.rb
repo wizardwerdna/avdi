@@ -1,14 +1,17 @@
 require_relative '../../entities/blog.rb'
-require_relative '../../z_repositories/post_repo'
+require_relative '../../z_repositories/in_memory_repos'
 
 describe Blog do
 
   before :each do
-    Repository.configure Entry => EntriesRepo.new, Post => PostsRepo.new
+    Repository.configure ({
+      Entry => InMemoryRepos::EntriesRepo.new, 
+      Post  => InMemoryRepos::PostsRepo.new
+    })
   end
 
-  let(:subject){Blog.new}
-  let(:entry){double "entry"}
+  let(:subject){ Blog.new }
+  let(:entry){ double "entry" }
 
   it "should have the proper title" do
     subject.title.should == "Watching Paint Dry"
@@ -20,7 +23,7 @@ describe Blog do
 
   context "new blog" do
 
-    it{should have(0).entries}
+    it{ should have(0).entries }
 
     it "should permit you to add new entries" do
       entry.stub(:pubdate)
@@ -31,9 +34,9 @@ describe Blog do
   end
 
   context "post_source" do
-    let!(:subject){Blog.new}
-    let(:title){double "title"}
-    let(:body){double "body"}
+    let!(:subject){ Blog.new }
+    let(:title){ double "title" }
+    let(:body){ double "body" }
     let(:source){ ->(attrs={}){OpenStruct.new(attrs)} }
 
     before :each do

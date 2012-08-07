@@ -6,10 +6,6 @@ class Blog < Entity
 
   attr_accessor :post_source
 
-  def initialize
-    @entries_repo = Repository.for(Entry)
-  end
-
   def title
     "Watching Paint Dry"
   end
@@ -19,7 +15,7 @@ class Blog < Entity
   end
 
   def add_entry entry
-    @entries_repo.add_entry entry
+    Repository.for(Entry).add_entry entry
   end
 
   def new_post attrs = {}
@@ -27,7 +23,7 @@ class Blog < Entity
   end
 
   def entries
-    @entries_repo.all_reverse_chrono_take10 
+    Repository.for(Entry).all_reverse_chrono_take10 
   end
 end
 
