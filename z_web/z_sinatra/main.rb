@@ -1,6 +1,6 @@
 require 'sinatra'
-require_relative '../application'
-require_relative 'application_configuration_ar.rb'
+require_relative '../../application'
+require_relative 'application_configuration.rb'
 
 module Bloog
   class Main < Sinatra::Base

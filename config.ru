@@ -44,6 +44,8 @@ module Rack
 end
 
 Rack::RackResponderSelector.new(self, {
-  "rails" => "z_rails.ru",
-  "sinatra" => "z_sinatra.ru"
+  "rails_ar" => "z_web/z_rails_ar.ru",
+  "rails" => "z_web/z_rails.ru",
+  "sinatra_ar" => "z_web/z_sinatra_ar.ru",
+  "sinatra" => "z_web/z_sinatra.ru"
 }).build

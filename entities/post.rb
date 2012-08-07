@@ -4,7 +4,7 @@ require_relative 'entry'
 class Post < Entry
   
   attr_accessor :title, :body, :blog 
-  attr_reader :pubdate
+  attr_accessor :pubdate
 
   validates :title, presence: true
 

@@ -1,4 +1,4 @@
-require_relative '../z_repositories/active_record_repos'
+require_relative '../../z_repositories/active_record_repos'
 
 THE_BLOG = Interactors::NewBlog[].blog
 

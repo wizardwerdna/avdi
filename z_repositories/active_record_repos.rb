@@ -4,6 +4,8 @@ module ActiveRecordRepos
 
   class PostMap < ActiveRecord::Base
     self.table_name = 'posts'
+
+    attr_accessible :title, :body, :pubdate
   end
 
   class EntriesRepo
@@ -13,7 +15,7 @@ module ActiveRecordRepos
     end
 
     def add_entry entry
-      PostMap.new(title: entry.title, body: entry.body).save
+      PostMap.new(title: entry.title, body: entry.body, pubdate: entry.pubdate).save
     end
 
     def all
@@ -28,7 +30,7 @@ module ActiveRecordRepos
 
     def post_maps_to_posts collection
       collection = Array collection
-      collection.map{|pm| post = Post.new(title: pm.title, body: pm.body); post.blog = @blog; post}
+      collection.map{|pm| post = Post.new(title: pm.title, body: pm.body, pubdate: pm.pubdate); post.blog = @blog; post}
     end
 
   end

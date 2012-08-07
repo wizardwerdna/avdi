@@ -1,6 +1,6 @@
 module Bloog 
-  require_relative '../application'
-  require_relative './application_configuration'
+  require_relative '../../application'
+  require_relative './application_configuration_ar'
 
   require ::File.expand_path('../config/environment',  __FILE__)
 
