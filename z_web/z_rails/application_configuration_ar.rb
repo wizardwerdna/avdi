@@ -7,8 +7,6 @@ Repository.configure({
   Post =>  ActiveRecordRepos::PostsRepo.new
 })
 
-THE_BLOG.post_source = Repository.for(Post).public_method(:new)
-
 ActiveRecord::Base.establish_connection({
   adapter: 'postgresql',
   encoding: 'unicode',

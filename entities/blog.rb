@@ -4,8 +4,6 @@ require_relative '../lib/entity'
 
 class Blog < Entity
 
-  attr_accessor :post_source
-
   def title
     "Watching Paint Dry"
   end
@@ -19,12 +17,13 @@ class Blog < Entity
   end
 
   def new_post attrs = {}
-    post_source.call(attrs.merge(blog: self))
+    Repository.for(Post).new attrs.merge(blog: self)
   end
 
   def entries
     Repository.for(Entry).all_reverse_chrono_take10 
   end
+
 end
 
 

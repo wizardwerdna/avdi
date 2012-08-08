@@ -6,4 +6,3 @@ Repository.configure({
 })
 
 THE_BLOG = Interactors::NewBlog[].blog
-THE_BLOG.post_source = Repository.for(Post).public_method(:new)
