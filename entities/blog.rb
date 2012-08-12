@@ -4,6 +4,16 @@ require_relative '../lib/entity'
 
 class Blog < Entity
 
+  attr_accessor :posts_repo, :entries_repo
+
+  def initialize entries_repo = Repository.for(Entry), 
+                 posts_repo = Repository.for(Post) 
+
+    self.entries_repo = entries_repo
+    self.posts_repo = posts_repo
+    super()
+  end
+
   def title
     "Watching Paint Dry"
   end
@@ -13,15 +23,15 @@ class Blog < Entity
   end
 
   def add_entry entry
-    Repository.for(Entry).add_entry entry
+    entries_repo.add_entry entry
   end
 
   def new_post attrs = {}
-    Repository.for(Post).new attrs.merge(blog: self)
+    posts_repo.new attrs.merge(blog: self)
   end
 
   def entries
-    Repository.for(Entry).all_reverse_chrono_take10 
+    entries_repo.all_reverse_chrono_take10 
   end
 
 end

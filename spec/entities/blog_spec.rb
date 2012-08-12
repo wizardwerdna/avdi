@@ -4,13 +4,11 @@ require_relative '../../z_repositories/in_memory_repos'
 describe Blog do
 
   before :each do
-    Repository.configure ({
-      Entry => InMemoryRepos::EntriesRepo.new, 
-      Post  => InMemoryRepos::PostsRepo.new
-    })
+    @entries_repo = InMemoryRepos::EntriesRepo.new
+    @posts_repo = InMemoryRepos::PostsRepo.new 
   end
-
-  let(:subject){ Blog.new }
+  
+  let(:subject){ Blog.new @entries_repo, @posts_repo }
   let(:entry){ double "entry" }
 
   it "should have the proper title" do
@@ -34,14 +32,11 @@ describe Blog do
   end
 
   context "creating a new post" do
-    let!(:subject){ Blog.new }
     let(:title){ double "title" }
     let(:body){ double "body" }
-    let(:repository) { Repository.for(Post) }
-
 
     it "should create a new post with the Post Repository" do
-      repository.should_receive(:new).with(title: title, blog: subject)
+      @posts_repo.should_receive(:new).with(title: title, blog: subject)
       subject.new_post(title: title)
     end
 
