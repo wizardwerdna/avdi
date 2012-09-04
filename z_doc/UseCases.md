@@ -1,22 +1,21 @@
 # Use Cases
 
-* NewBlog.new
+* PublishBlog(title: `<title>`, subtitle: `<subtitle>`)
 
-	Create a new blog.  Response(blog: `<blog>`)
+	Publish a new blog, having the specified parameters. Assign the blog an entity-id.  Response(..., blog_id: `<blog-id>`)
 
-* NewPost.new(blog: `<blog>`, title: `<title>`, body: `<body>`)
+* PublishPost.new(blog_id: `<blog-id>`, title: `<title>`, body: `<body>`, tags: `<tags-list-string>`)
 
-	  Create an unpublished blog post for `<blog>`, having `<title>` and `<body>`. Response(blog: `<blog>`, post: `<post>`)
+	  Publish a post, having `<title>`, `<body>` and `<taglist>` in `<blog>`.  Assign the post an entity-id.  Response(..., post_id: `<post_id>)
 
-	  **Alternative 1:** If `<title>` or `<body>` are null or not given, they will be treated as empty strings.
-			
-    **Alternative 2:** If `<blog>` is null, not given or not a Blog object, an error condition is raised and nothing else is done.
+	  **Alternative 1:** If post parameters are not valid, share errors and do nothing else.  Response(..., errors: `<errors>`)
 
-* PublishPost.new(blog: `<blog>`, title: `<title>`, body: `body`)
+* RetrieveAllPosts.new(blog_id: `<blog_id`, tags: `<tag-list-string>`)
 
-	  Publish a post, having `<title>` and `<body>` in `<blog>`.  Response(post: `<post>`)
+    Obtain a list of all posts for the blog, filtered by any specified tags.  Response(..., posts: `<list-of-posts>`)
 
-	  **Alternative 1:** If post parameters are not valid, share errors.  Response(post: `<post>`, errors: `<errors>`)
+    **Alternative 1:** If blog parameter is invalid, raise an error.
 
-    **Alternative 2:** If `<blog>` is null, not given or not a Blog object, an error condition is raised and nothing else is done.
+* RetrieveAllTags.new(blog_id: `<blog_id>`)  <tags-list-string>`)
 
+    Obtain a list of all tags for all posts.  Response(tags: `<taglist>`)

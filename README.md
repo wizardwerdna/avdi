@@ -1,9 +1,9 @@
 # A Web Application for Avdi and Uncle Bob
 
 Inspired by [Avdi Grimm's Objects on Rails](http://dev.blog.avdi.org), and further inspired by [Bob Martin's](http://cleancoders.com) impressive keynote at Ruby Midwest 2011,
-entitled [Architecture the Lost Years](http://support.iawriter.com/help/kb/frequently-asked-questions-in-general/markdown-syntax-reference-guide),
+entitled [Architecture the Lost Years](http://www.confreaks.com/videos/759-rubymidwest2011-keynote-architecture-the-lost-years),
 I undertook to develop a web appliction (a freaking blog) based upon Avdi's book, but with an eye toward putting the application architecture at the highest
-level, and reducing the communication and persistence layers to "mere details."
+level, and reducing the communication and persistence layers to "mere details."  Uncle Bob recently provided details in a [The Clean Architecture](http://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html) at his company's blog.
 
 The idea is that virtually any mode of persistence and any mode of web communication (or heck even a console applicaiton) should be plugged in with minimal
 difficulty.  In this way, the business elements can be specified, developed and tested in isolation.

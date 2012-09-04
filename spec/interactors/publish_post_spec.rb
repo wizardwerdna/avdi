@@ -29,7 +29,7 @@ describe Interactors do
 
       it "should construct a post from the post_source, having requested attributes" do
         request.blog.should_receive(:new_post).with( post_hash ).and_return post
-        result = subject.execute
+        result = subject.run
         result.post.blog.should == request.blog
         result.post.title.should == request.title
         result.post.body.should == request.body
@@ -37,11 +37,11 @@ describe Interactors do
   
       it "should tell the post to publish to its blog" do
         post.should_receive(:publish).and_return true
-        subject.execute
+        subject.run
       end
 
       it "should succeed" do
-        subject.execute.should be_ok
+        subject.run.should be_ok
       end
 
     end
@@ -63,11 +63,11 @@ describe Interactors do
       end
      
       it "should fail" do
-        subject.execute.should_not be_ok
+        subject.run.should_not be_ok
       end
 
       it "should return the errors" do
-        subject.execute.errors.should == errors
+        subject.run.errors.should == errors
       end
     
     end
