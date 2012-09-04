@@ -24,7 +24,10 @@ module Rack
 
     def rack_responder_name
       name = (ENV["WEB"] || default_rack_responder_name).downcase
-      raise "no web responder for #{ENV["WEB"]}" unless hash.keys.include?(name)
+      unless hash.keys.include?(name)
+        name = hash.keys.first
+        puts "no web responder for #{ENV["WEB"]}: using default #{name}"
+      end
       name
     end
 
@@ -33,7 +36,7 @@ module Rack
     end
 
     def filename_for name
-      hash.fetch(name, hash.keys.first) 
+      hash.fetch(name)
     end
 
     def default_rack_responder_name

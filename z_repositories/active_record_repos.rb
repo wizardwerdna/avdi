@@ -10,10 +10,6 @@ module ActiveRecordRepos
 
   class EntriesRepo
 
-    def initialize blog
-      @blog = blog
-    end
-
     def add_entry entry
       PostMap.new(title: entry.title, body: entry.body, pubdate: entry.pubdate).save
     end
@@ -30,7 +26,11 @@ module ActiveRecordRepos
 
     def post_maps_to_posts collection
       collection = Array collection
-      collection.map{|pm| post = Post.new(title: pm.title, body: pm.body, pubdate: pm.pubdate); post.blog = @blog; post}
+      collection.map do |pm| 
+        post = Post.new(title: pm.title, body: pm.body, pubdate: pm.pubdate);
+        post.blog = THE_BLOG; 
+        post
+      end
     end
 
   end

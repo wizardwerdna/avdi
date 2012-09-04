@@ -1,11 +1,12 @@
 require_relative '../../z_repositories/active_record_repos'
 
-THE_BLOG = Interactors::NewBlog[].blog
 
 Repository.configure({
-  Entry => ActiveRecordRepos::EntriesRepo.new(THE_BLOG),
+  Entry => ActiveRecordRepos::EntriesRepo.new,
   Post =>  ActiveRecordRepos::PostsRepo.new
 })
+
+THE_BLOG = Interactors::NewBlog[].blog
 
 ActiveRecord::Base.establish_connection({
   adapter: 'postgresql',
