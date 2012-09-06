@@ -28,17 +28,17 @@ describe Interactors do
 
       it "should obtain the post from blog" do
         blog.should_receive(:new_post).and_return post
-        subject.execute.blog.should == blog
+        subject.run.blog.should == blog
       end
 
       it "should create a new post with the specified attributes" do
-        p = subject.execute.post
+        p = subject.run.post
         p.title == request.title
         p.body == request.body
       end
 
       it "should bind the post to this blog" do 
-        subject.execute.blog.should == blog
+        subject.run.blog.should == blog
       end
 
     end
@@ -49,7 +49,7 @@ describe Interactors do
       
       it "should create a new post with the specified attributes being empty" do
         blog.should_receive(:new_post).with(blog: blog, title: "", body: "").and_return post 
-        p = subject.execute
+        p = subject.run
         p.post.title.should be_empty
         p.post.body.should be_empty
       end
@@ -60,11 +60,11 @@ describe Interactors do
 
       it "should complain unless a blog is specified" do
         expect{Interactors::NewPost.new(title: 'foo', body: 'bar').
-          execute}.to raise_error(ArgumentError)
+          run}.to raise_error(ArgumentError)
       end
 
       it "should complain unless the specified blog is a Blog" do
-        expect{Interactors::NewPost.new(blog: 13).execute}.to raise_error ArgumentError
+        expect{Interactors::NewPost.new(blog: 13).run}.to raise_error ArgumentError
       end
 
     end

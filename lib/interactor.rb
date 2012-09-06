@@ -13,8 +13,8 @@ class Interactor
     @r = Request.new request 
   end
 
-  def run
-    raise "abstract class instance should not be executed"
-  end
+  # def run
+  #   raise "abstract class instance should not be executed"
+  # end
 
 end

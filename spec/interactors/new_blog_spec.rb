@@ -11,7 +11,7 @@ describe Interactors do
     it_should_behave_like "an interactor"
 
     it "should respond with a new blog" do
-      subject.execute.blog.should be_kind_of Blog
+      subject.run.blog.should be_kind_of Blog
     end
   end
 

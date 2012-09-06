@@ -4,11 +4,16 @@ module Interactors
 
   class PublishPost < Interactor
 
-    def run
-      Post.new(r._select :blog_id, :title, :body, :tags).
-        publish.
-        to_hash
-    end 
+    def run 
+
+      post = r.blog.new_post blog: r.blog, title: r.title, body: r.body 
+      if post.publish
+        Response.new(post: post)
+      else
+        Response.new(post: post, errors: post.errors)
+      end
+
+    end
 
   end
 

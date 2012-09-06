@@ -3,7 +3,7 @@ require_relative '../entities/blog'
 module Interactors 
 
   class NewBlog < Interactor
-    def execute
+    def run
       Response.new(blog: Blog.new)
     end 
   end
